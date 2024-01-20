@@ -6,6 +6,13 @@ player_one = True
 
 while playing:
 
+    if player_one:
+        message = "Player One... you're up!"
+    else:
+        message = "Player Two... you're up!"
+    print("")
+    print(message)
+
     for i in range(0, len(houses_seed_count)):
         houses_seed_count[i] = int(houses_seed_count[i])
         if houses_seed_count[i] < 10:
