@@ -34,5 +34,31 @@ while playing:
 
     if user_input == "exit":
         playing = False
+    elif player_one and user_input == "a":
+        selected_house = 5
+    elif player_one and user_input == "b":
+        selected_house = 4
+    elif player_one and user_input == "c":
+        selected_house = 3
+    elif player_one and user_input == "d":
+        selected_house = 2
+    elif player_one and user_input == "e":
+        selected_house = 1
+    elif player_one and user_input == "f":
+        selected_house = 0
+    elif not player_one and user_input == "a":
+        selected_house = 12
+    elif not player_one and user_input == "b":
+        selected_house = 11
+    elif not player_one and user_input == "c":
+        selected_house = 10
+    elif not player_one and user_input == "d":
+        selected_house = 9
+    elif not player_one and user_input == "e":
+        selected_house = 8
+    elif not player_one and user_input == "f":
+        selected_house = 7
+
+    houses_seed_count[selected_house] = 0
 
     player_one = not player_one
