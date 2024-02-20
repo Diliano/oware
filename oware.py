@@ -16,6 +16,10 @@ while playing:
         message = "Invalid input. Have another go, Player One."
     elif not player_one and message_code == -1:
         message = "Invalid input. Have another go, Player Two."
+    elif player_one and message_code == -2:
+        message = "You must choose a house with seeds, Player One. Try again."
+    elif not player_one and message_code == -2:
+        message = "You must choose a house with seeds, Player Two. Try again."
     print("")
     print(message)
     message_code = 0
@@ -70,5 +74,9 @@ while playing:
         selected_house = -1 
     
     if selected_house >= 0:
+        seeds = houses_seed_count[selected_house]
         houses_seed_count[selected_house] = 0
-        player_one = not player_one
+        if int(seeds) > 0:
+            player_one = not player_one
+        else:
+            message_code = -2
