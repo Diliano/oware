@@ -45,6 +45,7 @@ while playing:
 
     if user_input == "exit":
         playing = False
+        selected_house = 0
     elif player_one and user_input == "a":
         selected_house = 5
     elif player_one and user_input == "b":
@@ -80,3 +81,13 @@ while playing:
             player_one = not player_one
         else:
             message_code = -2
+
+    recipient = selected_house + 1
+    while int(seeds) > 0:
+        if recipient == 6:
+            recipient = 7
+        if recipient == 13:
+            recipient = 0
+        houses_seed_count[recipient] = int(houses_seed_count[recipient]) + 1
+        seeds = int(seeds) - 1
+        recipient += 1
