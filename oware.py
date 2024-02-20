@@ -4,14 +4,21 @@ playing = True
 
 player_one = True
 
+message_code = 0
+
 while playing:
 
-    if player_one:
+    if player_one and message_code == 0:
         message = "Player One... you're up!"
-    else:
+    elif not player_one and message_code == 0:
         message = "Player Two... you're up!"
+    elif player_one and message_code == -1:
+        message = "Invalid input. Have another go, Player One."
+    elif not player_one and message_code == -1:
+        message = "Invalid input. Have another go, Player Two."
     print("")
     print(message)
+    message_code = 0
 
     for i in range(0, len(houses_seed_count)):
         houses_seed_count[i] = int(houses_seed_count[i])
@@ -30,7 +37,7 @@ while playing:
         print("        f    e    d    c    b    a")
     print("")
 
-    user_input = input("Enter 'exit' to leave the game: ")
+    user_input = input("Enter a letter to choose the corresponding house or enter 'exit' to leave the game: ")
 
     if user_input == "exit":
         playing = False
@@ -49,7 +56,7 @@ while playing:
     elif not player_one and user_input == "a":
         selected_house = 12
     elif not player_one and user_input == "b":
-        selected_house = 11
+        selected_house = 11 
     elif not player_one and user_input == "c":
         selected_house = 10
     elif not player_one and user_input == "d":
@@ -58,7 +65,10 @@ while playing:
         selected_house = 8
     elif not player_one and user_input == "f":
         selected_house = 7
-
-    houses_seed_count[selected_house] = 0
-
-    player_one = not player_one
+    else:
+        message_code = -1
+        selected_house = -1 
+    
+    if selected_house >= 0:
+        houses_seed_count[selected_house] = 0
+        player_one = not player_one
