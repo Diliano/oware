@@ -76,18 +76,33 @@ while playing:
     
     if selected_house >= 0:
         seeds = houses_seed_count[selected_house]
-        houses_seed_count[selected_house] = 0
-        if int(seeds) > 0:
-            player_one = not player_one
-        else:
+        if int(seeds) == 0:
             message_code = -2
+            continue
 
-    recipient = selected_house + 1
-    while int(seeds) > 0:
-        if recipient == 6:
-            recipient = 7
-        if recipient == 13:
-            recipient = 0
-        houses_seed_count[recipient] = int(houses_seed_count[recipient]) + 1
-        seeds = int(seeds) - 1
-        recipient += 1
+        houses_seed_count[selected_house] = 0
+            
+        current_house = selected_house
+        while int(seeds) > 0:
+            current_house += 1
+            if current_house == 6:  
+                current_house = 7
+            elif current_house == 13:  
+                current_house = 0
+
+            houses_seed_count[current_house] = int(houses_seed_count[current_house]) + 1
+            seeds = int(seeds) - 1
+
+        if player_one:
+            opponent_houses_range = range(7, 13)  
+        else:
+            opponent_houses_range = range(0, 6)  
+
+        if current_house in opponent_houses_range and houses_seed_count[current_house] in [2, 3]:
+            if player_one:
+                houses_seed_count[6] = int(houses_seed_count[6]) + houses_seed_count[current_house]
+            else:
+                houses_seed_count[13] = int(houses_seed_count[13]) + houses_seed_count[current_house]
+            houses_seed_count[current_house] = 0
+
+        player_one = not player_one  
