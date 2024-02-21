@@ -73,36 +73,49 @@ while playing:
     else:
         message_code = -1
         selected_house = -1 
-    
+
+    seeds = 0
     if selected_house >= 0:
         seeds = houses_seed_count[selected_house]
-        if int(seeds) == 0:
-            message_code = -2
-            continue
+    if int(seeds) == 0:
+        message_code = -2
+        continue
 
-        houses_seed_count[selected_house] = 0
-            
-        current_house = selected_house
-        while int(seeds) > 0:
-            current_house += 1
-            if current_house == 6:  
-                current_house = 7
-            elif current_house == 13:  
-                current_house = 0
+    houses_seed_count[selected_house] = 0
+        
+    current_house = selected_house
+    while int(seeds) > 0:
+        current_house += 1
+        if current_house == 6:  
+            current_house = 7
+        elif current_house == 13:  
+            current_house = 0
 
-            houses_seed_count[current_house] = int(houses_seed_count[current_house]) + 1
-            seeds = int(seeds) - 1
+        houses_seed_count[current_house] = int(houses_seed_count[current_house]) + 1
+        seeds = int(seeds) - 1
 
+    captures = 0 
+    check_house = current_house  
+    while True:
         if player_one:
-            opponent_houses_range = range(7, 13)  
-        else:
-            opponent_houses_range = range(0, 6)  
-
-        if current_house in opponent_houses_range and houses_seed_count[current_house] in [2, 3]:
-            if player_one:
-                houses_seed_count[6] = int(houses_seed_count[6]) + houses_seed_count[current_house]
+            if check_house in range(7, 13) and houses_seed_count[check_house] in [2, 3]:
+                captures += houses_seed_count[check_house]
+                houses_seed_count[check_house] = 0
+                check_house -= 1
             else:
-                houses_seed_count[13] = int(houses_seed_count[13]) + houses_seed_count[current_house]
-            houses_seed_count[current_house] = 0
+                break
+        else:
+            if check_house in range(0, 6) and houses_seed_count[check_house] in [2, 3]:
+                captures += houses_seed_count[check_house]
+                houses_seed_count[check_house] = 0
+                check_house -= 1
+            else:
+                break
 
-        player_one = not player_one  
+    if captures > 0:
+        if player_one:
+            houses_seed_count[6] = int(houses_seed_count[6]) + captures
+        else:
+            houses_seed_count[13] = int(houses_seed_count[13]) + captures
+
+    player_one = not player_one
