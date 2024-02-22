@@ -8,34 +8,33 @@ message_code = 0
 
 while playing:
 
-    if player_one and message_code == 0:
-        message = "Player One... you're up!"
-    elif not player_one and message_code == 0:
-        message = "Player Two... you're up!"
-    elif player_one and message_code == -1:
-        message = "Invalid input. Have another go, Player One."
-    elif not player_one and message_code == -1:
-        message = "Invalid input. Have another go, Player Two."
-    elif player_one and message_code == -2:
-        message = "You must choose a house with seeds, Player One. Try again."
-    elif not player_one and message_code == -2:
-        message = "You must choose a house with seeds, Player Two. Try again."
+    if player_one:
+        if message_code == 0:
+            message = "Player One... you're up!"
+        elif message_code == -1:
+            message = "Invalid input. Have another go, Player One."
+        elif message_code == -2:
+            message = "You must choose a house with seeds, Player One. Try again."
+    else:
+        if message_code == 0:
+            message = "Player Two... you're up!"
+        elif message_code == -1:
+            message = "Invalid input. Have another go, Player Two."
+        elif message_code == -2:
+            message = "You must choose a house with seeds, Player Two. Try again."
     print("")
     print(message)
     message_code = 0
 
-    for i in range(0, len(houses_seed_count)):
-        houses_seed_count[i] = int(houses_seed_count[i])
-        if houses_seed_count[i] < 10:
-            houses_seed_count[i] = " " + str(houses_seed_count[i])
+    display_houses = [" " + str(seed) if seed < 10 else str(seed) for seed in houses_seed_count]
 
     print("")
     if not player_one:
         print("        a    b    c    d    e    f")
     print("+----+----+----+----+----+----+----+----+")
-    print(f"|    | {houses_seed_count[12]} | {houses_seed_count[11]} | {houses_seed_count[10]} | {houses_seed_count[9]} | {houses_seed_count[8]} | {houses_seed_count[7]} |    |")
-    print(f"| {houses_seed_count[13]} |----+----+----+----+----+----| {houses_seed_count[6]} |")
-    print(f"|    | {houses_seed_count[0]} | {houses_seed_count[1]} | {houses_seed_count[2]} | {houses_seed_count[3]} | {houses_seed_count[4]} | {houses_seed_count[5]} |    |")
+    print(f"|    | {display_houses[12]} | {display_houses[11]} | {display_houses[10]} | {display_houses[9]} | {display_houses[8]} | {display_houses[7]} |    |")
+    print(f"| {display_houses[13]} |----+----+----+----+----+----| {display_houses[6]} |")
+    print(f"|    | {display_houses[0]} | {display_houses[1]} | {display_houses[2]} | {display_houses[3]} | {display_houses[4]} | {display_houses[5]} |    |")
     print("+----+----+----+----+----+----+----+----+")
     if player_one:
         print("        f    e    d    c    b    a")
@@ -64,7 +63,7 @@ while playing:
     if selected_house >= 0:
         seeds = houses_seed_count[selected_house]
 
-    if int(seeds) == 0:
+    if seeds == 0:
         message_code = -2
         continue
 
@@ -72,7 +71,7 @@ while playing:
         
     current_house = selected_house
 
-    while int(seeds) > 0:
+    while seeds > 0:
         current_house += 1
 
         if current_house == 6:  
@@ -80,8 +79,8 @@ while playing:
         elif current_house == 13:  
             current_house = 0
 
-        houses_seed_count[current_house] = int(houses_seed_count[current_house]) + 1
-        seeds = int(seeds) - 1
+        houses_seed_count[current_house] = houses_seed_count[current_house] + 1
+        seeds = seeds - 1
 
     captures = 0 
 
@@ -105,8 +104,8 @@ while playing:
 
     if captures > 0:
         if player_one:
-            houses_seed_count[6] = int(houses_seed_count[6]) + captures
+            houses_seed_count[6] = houses_seed_count[6] + captures
         else:
-            houses_seed_count[13] = int(houses_seed_count[13]) + captures
+            houses_seed_count[13] = houses_seed_count[13] + captures
 
     player_one = not player_one
