@@ -48,10 +48,10 @@ while playing:
         playing = False
     else:
         if player_one:
-            if user_input in "abcdef":
+            if user_input in "abcdef" and len(user_input) == 1:
                 selected_house = "fedcba".index(user_input)
         else:
-            if user_input in "abcdef":
+            if user_input in "abcdef" and len(user_input) == 1:
                 selected_house = 7 + "fedcba".index(user_input)
 
         if selected_house == -1:
