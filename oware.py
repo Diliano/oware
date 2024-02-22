@@ -43,40 +43,28 @@ while playing:
 
     user_input = input("Enter a letter to choose the corresponding house or enter 'exit' to leave the game: ")
 
+    selected_house = -1
+
     if user_input == "exit":
         playing = False
-        selected_house = 0
-    elif player_one and user_input == "a":
-        selected_house = 5
-    elif player_one and user_input == "b":
-        selected_house = 4
-    elif player_one and user_input == "c":
-        selected_house = 3
-    elif player_one and user_input == "d":
-        selected_house = 2
-    elif player_one and user_input == "e":
-        selected_house = 1
-    elif player_one and user_input == "f":
-        selected_house = 0
-    elif not player_one and user_input == "a":
-        selected_house = 12
-    elif not player_one and user_input == "b":
-        selected_house = 11 
-    elif not player_one and user_input == "c":
-        selected_house = 10
-    elif not player_one and user_input == "d":
-        selected_house = 9
-    elif not player_one and user_input == "e":
-        selected_house = 8
-    elif not player_one and user_input == "f":
-        selected_house = 7
     else:
-        message_code = -1
-        selected_house = -1 
+        if player_one:
+            if user_input in "abcdef":
+                selected_house = "fedcba".index(user_input)
+        else:
+            if user_input in "abcdef":
+                selected_house = 7 + "fedcba".index(user_input)
+                print(selected_house)
+
+        if selected_house == -1:
+            message_code = -1
+            continue
 
     seeds = 0
+
     if selected_house >= 0:
         seeds = houses_seed_count[selected_house]
+
     if int(seeds) == 0:
         message_code = -2
         continue
@@ -84,8 +72,10 @@ while playing:
     houses_seed_count[selected_house] = 0
         
     current_house = selected_house
+
     while int(seeds) > 0:
         current_house += 1
+
         if current_house == 6:  
             current_house = 7
         elif current_house == 13:  
@@ -95,7 +85,9 @@ while playing:
         seeds = int(seeds) - 1
 
     captures = 0 
+
     check_house = current_house  
+    
     while True:
         if player_one:
             if check_house in range(7, 13) and houses_seed_count[check_house] in [2, 3]:
