@@ -54,7 +54,6 @@ while playing:
         else:
             if user_input in "abcdef":
                 selected_house = 7 + "fedcba".index(user_input)
-                print(selected_house)
 
         if selected_house == -1:
             message_code = -1
@@ -87,7 +86,7 @@ while playing:
     captures = 0 
 
     check_house = current_house  
-    
+
     while True:
         if player_one:
             if check_house in range(7, 13) and houses_seed_count[check_house] in [2, 3]:
