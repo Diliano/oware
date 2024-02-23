@@ -9,6 +9,49 @@ message_code = 0
 while playing:
 
     if player_one:
+        player_houses = houses_seed_count[0:6] 
+        opponent_houses = houses_seed_count[7:13] 
+        opponent_collection_house_index = 13
+    else:
+        player_houses = houses_seed_count[7:13]  
+        opponent_houses = houses_seed_count[0:6]  
+        opponent_collection_house_index = 6
+
+    if all(seeds == 0 for seeds in player_houses):
+        houses_seed_count[opponent_collection_house_index] += sum(opponent_houses)
+
+        for i in range(len(opponent_houses)):
+            houses_seed_count[i] = 0
+
+        display_houses = [" " + str(seed) if seed < 10 else str(seed) for seed in houses_seed_count]
+
+        print("")
+        print("-------------")
+        print("----FINAL----")
+        print("----BOARD----")
+        print("-------------")
+        print("")
+        print("+----+----+----+----+----+----+----+----+")
+        print(f"|    | {display_houses[12]} | {display_houses[11]} | {display_houses[10]} | {display_houses[9]} | {display_houses[8]} | {display_houses[7]} |    |")
+        print(f"| {display_houses[13]} |----+----+----+----+----+----| {display_houses[6]} |")
+        print(f"|    | {display_houses[0]} | {display_houses[1]} | {display_houses[2]} | {display_houses[3]} | {display_houses[4]} | {display_houses[5]} |    |")
+        print("+----+----+----+----+----+----+----+----+")
+        print("")
+        print(f"Final Scores - Player One: {houses_seed_count[6]}, Player Two: {houses_seed_count[13]}")
+        print("")
+
+        if houses_seed_count[6] > houses_seed_count[13]:
+            print("Player One wins!")
+            print("")
+        elif houses_seed_count[13] > houses_seed_count[6]:
+            print("Player Two wins!")
+            print("")
+        else:
+            print("It's a tie!")
+            print("")
+        break 
+
+    if player_one:
         if message_code == 0:
             message = "Player One... you're up!"
         elif message_code == -1:
