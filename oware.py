@@ -6,6 +6,20 @@ player_one = True
 
 message_code = 0
 
+print("-------------------------------------------------Welcome to Oware!------------------------------------------------------------")
+print("------------------------------------------------------------------------------------------------------------------------------")
+print("---------------------------------------------------Instructions---------------------------------------------------------------")
+print("------------------------------------------------------------------------------------------------------------------------------")
+print("1. Players take turns to select a house to distribute seeds anti-clockwise.")
+print("2. If the last seed lands in an opponent's house that then has 2 or 3 seeds, those seeds are captured.")
+print("3. Additionally, if any preceding houses on the opponent's side also have exactly 2 or 3 seeds, those seeds are also captured.")
+print("4. The game ends when a player cannot play a turn. Remaining seeds go to the opponent.")
+print("5. The player with the most seeds in their store at the end wins.")
+print("6. Enter 'a' to 'f' to select a house, or 'exit' to end the game.")
+print("------------------------------------------------------------------------------------------------------------------------------")
+print("-----------------------------------------------Let's start the game!----------------------------------------------------------")
+print("------------------------------------------------------------------------------------------------------------------------------")
+
 while playing:
 
     if player_one:
