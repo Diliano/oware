@@ -98,6 +98,8 @@ while playing:
     print("")
 
     user_input = input("Enter a letter to choose the corresponding house or enter 'exit' to leave the game: ")
+    print("")
+    print("------------------------------------------------------------------------------------------------------------------------------")
 
     selected_house = -1
 
@@ -161,8 +163,21 @@ while playing:
 
     if captures > 0:
         if player_one:
-            houses_seed_count[6] = houses_seed_count[6] + captures
+            houses_seed_count[6] += captures
+            player = "Player One"
         else:
-            houses_seed_count[13] = houses_seed_count[13] + captures
+            houses_seed_count[13] += captures
+            player = "Player Two"
+
+        if captures == 1:
+            capture_message = f"\n{player} made a strategic move, capturing {captures} seed!"
+        elif 2 <= captures <= 3:
+            capture_message = f"\nGreat move, {player}! {captures} seeds captured!"
+        elif 4 <= captures <= 6:
+            capture_message = f"\nFantastic! {player} has captured {captures} seeds!"
+        else:  
+            capture_message = f"\nIncredible! {player} dominates with {captures} seeds captured!"
+
+        print(capture_message)
 
     player_one = not player_one
