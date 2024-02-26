@@ -40,8 +40,6 @@ To play Oware, you need to have Python installed on your machine.
 
 ## How to Play
 
-## How to Play
-
 1. The game board consists of two rows of six pits, with a large store at each end for the captured seeds.
 2. Players take turns selecting a pit from their side to sow its seeds anti-clockwise.
 3. If the final seed sown lands in an opponent's pit that, after sowing, contains exactly 2 or 3 seeds, those seeds are captured and placed into the player's store.
